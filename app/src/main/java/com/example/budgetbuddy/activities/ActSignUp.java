@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import com.example.budgetbuddy.R;
 import com.example.budgetbuddy.helper.Utils;
 import com.example.budgetbuddy.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
@@ -29,6 +31,7 @@ public class ActSignUp extends ActBase {
     String uid;
 
     User user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,11 @@ public class ActSignUp extends ActBase {
                             }else{
 
                             }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.e("Sign up error",e.getMessage().toString());
                         }
                     });
                 }

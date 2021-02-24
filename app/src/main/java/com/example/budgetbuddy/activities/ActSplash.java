@@ -30,4 +30,15 @@ public class ActSplash extends ActBase {
         }, 2000);
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 }
