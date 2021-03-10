@@ -7,19 +7,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.budgetbuddy.R;
 import com.example.budgetbuddy.helper.Loader;
 import com.example.budgetbuddy.helper.Utils;
+import com.example.budgetbuddy.model.User;
+import com.google.gson.Gson;
 import com.pixplicity.easyprefs.library.Prefs;
 
 
-class ActBase extends AppCompatActivity {
+public class ActBase extends AppCompatActivity {
 
     Loader loader;
     public Utils utils = new Utils();
+    public Gson gson = new Gson();
     Activity getActivity(){
         return  this;
     }
 
     public String getUserId(){
-        return Prefs.getString(String.valueOf(R.string.user_id),"");
+        return Prefs.getString(getResources().getString(R.string.user_id),"");
+    }
+
+    public User getUser(){
+        return gson.fromJson(Prefs.getString(getResources().getString(R.string.user),""),User.class);
     }
 
     public void showLoader() {

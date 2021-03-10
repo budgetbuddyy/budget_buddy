@@ -1,34 +1,23 @@
 package com.example.budgetbuddy.activities;
 
-import androidx.annotation.NonNull;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.budgetbuddy.R;
-import com.example.budgetbuddy.helper.Utils;
 import com.example.budgetbuddy.model.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.pixplicity.easyprefs.library.Prefs;
+import com.google.gson.Gson;
 
 public class ActSignUp extends ActBase {
 
     TextInputLayout edtEmailId, edtPassword, edtName, edtMobile;
     Button btnRegister;
-    FirebaseAuth mAuth;
-    DatabaseReference mDatabase;
     String uid;
+    Gson gson;
+
 
     User user;
 
@@ -51,35 +40,24 @@ public class ActSignUp extends ActBase {
 
                 String email_id = edtEmailId.getEditText().getText().toString();
                 String password = edtPassword.getEditText().getText().toString();
-                String name = edtMobile.getEditText().getText().toString();
+                String name = edtName.getEditText().getText().toString();
                 String mobile = edtMobile.getEditText().getText().toString();
 
                 if (credentialValidation(email_id, password, name, mobile)) {
-                    showLoader();
+//                    showLoader();
 
-                    mAuth.createUserWithEmailAndPassword(email_id, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                closeLoader();
-                                final FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
-                                if(current_user != null){
-                                    uid = current_user.getUid();
-                                    Prefs.putString(String.valueOf(R.string.user_id),uid);
-                                }
+                    user.setUser_email_id(email_id);
+                    user.setUser_mobile(mobile);
+                    user.setUser_password(password);
+                    user.setUser_name(name);
 
-                                startActivity(new Intent(ActSignUp.this,ActMain.class));
-                                finish();
-                            }else{
+                    Intent  signUpIntent = new Intent(ActSignUp.this,ActExpenseCategories.class);
+                    signUpIntent.putExtra("user_detail",gson.toJson(user));
+                    signUpIntent.putExtra("from","0");
 
-                            }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.e("Sign up error",e.getMessage().toString());
-                        }
-                    });
+                    startActivity(signUpIntent);
+
+
                 }
             }
         });
@@ -89,29 +67,41 @@ public class ActSignUp extends ActBase {
     private boolean credentialValidation(String email_id, String password, String name, String mobile) {
 
         if (!utils.isStringValidate(name)) {
+            utils.showErrorMsg(edtName,"Enter name");
             utils.yoyoAnimation(edtName);
             return false;
         }
 
         if (!utils.isStringValidate(mobile)) {
+            utils.showErrorMsg(edtMobile,"Enter mobile number");
             utils.yoyoAnimation(edtMobile);
             return false;
         }
 
         if (!utils.isStringValidate(email_id)) {
+            utils.showErrorMsg(edtEmailId,"Enter email id");
             utils.yoyoAnimation(edtEmailId);
             return false;
         }
 
         if(!utils.isEmailValidate(email_id)){
+            utils.showErrorMsg(edtEmailId,"Enter valid email id");
             utils.yoyoAnimation(edtEmailId);
             return false;
         }
 
-        if (!utils.isStringValidate(password)) {
+        if (password.length() < 5){
+            Toast.makeText(this, "Password length must be more than six letters for security purpose", Toast.LENGTH_LONG).show();
             utils.yoyoAnimation(edtPassword);
             return false;
         }
+
+        if (!utils.isStringValidate(password)) {
+            utils.showErrorMsg(edtPassword,"Enter password");
+            utils.yoyoAnimation(edtPassword);
+            return false;
+        }
+
 
 
         return true;
@@ -121,6 +111,7 @@ public class ActSignUp extends ActBase {
         //Utils & Model
 
         user = new User();
+        gson = new Gson();
         //EditText
         edtEmailId = findViewById(R.id.edt_email_id);
         edtPassword = findViewById(R.id.edt_password);
@@ -128,9 +119,7 @@ public class ActSignUp extends ActBase {
         edtMobile = findViewById(R.id.edt_mobile);
 
         //Buttons
-        btnRegister = findViewById(R.id.btn_register);
+        btnRegister = findViewById(R.id.btn_next);
 
-        //Firebase
-        mAuth = FirebaseAuth.getInstance();
     }
 }

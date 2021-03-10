@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Budget Buddy</string>
     <string name="user_id">user_id</string>
+    <string name="user">user</string>
     <string name="register">Register</string>
     <string name="password">Password</string>
     <string name="email_id">Email ID</string>
@@ -8,4 +9,67 @@
     <string name="name">Name</string>
     <string name="login">Login</string>
     <string name="forget_password">Forget Password?</string>
+    <string name="_0_0">0.0</string>
+    <string name="next">Next</string>
+
+
+    <string-array name="arrMenu">
+        <item>Home</item>
+        <!--<item>Customer dashboard</item>-->
+        <item>Today\'s Sms</item>
+        <item>Add expense</item>
+        <item>Savings Suggestions</item>
+        <item>Settings</item>
+        <item>Logout</item>
+    </string-array>
+
+    <string-array name="categories">
+        <item>Grocery</item>
+        <item>Transportation</item>
+        <item>Medical</item>
+        <item>Investment</item>
+        <item>Food</item>
+        <item>Miscellaneous</item>
+    </string-array>
+
+    <string-array name="questions">
+        <item>What is your first pet\'s name?</item>
+        <item>What is your born city?</item>
+        <item>What is your first teacher name?</item>
+        <item>What is your mother\'s middle name?</item>
+        <item>What is your favourite sport?</item>
+        <item>What is your nick name at home?</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_password">Enter New Password</string>
+    <string name="re_enter_password">Re-enter Password</string>
+    <string name="change">Change</string>
+    <string name="change_password">Change Password</string>
+    <string name="enter_old_password">Enter Old Password</string>
+    <string name="salary">Salary</string>
+    <string name="home">Home</string>
+    <string name="today_s_sms">Today\'s SMS</string>
+    <string name="add_expenses">Add Expenses</string>
+    <string name="settings">Settings</string>
+    <string name="savings_suggestion">Savings suggestion</string>
+    <string name="logout">Logout</string>
+    <string name="reminder">Reminder</string>
+    <string name="set_reminder">Set reminder</string>
+    <string name="date">Date</string>
+    <string name="time">Select your time</string>
+
+    <string name="editor_activity_title_new_reminder">Add Reminder Details</string>
+    <string name="editor_activity_title_edit_reminder">Edit Reminder</string>
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+    <string name="discard">Discard</string>
+    <string name="editor_insert_reminder_successful">Reminder saved</string>
+
+    <string name="editor_insert_reminder_failed">Error with saving reminder</string>
+
+    <string name="editor_update_reminder_successful">Reminder updated</string>
+
+    <string name="editor_update_reminder_failed">Error with updating reminder</string>
+
+    <string name="reminder_title">AlarmReminder</string>
 </resources>

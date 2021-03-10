@@ -34,4 +34,12 @@
     <color name="app_common_color">#666D75</color>
     <color name="disable_bg_color">#80666c76</color>
 
+
+    <color name="Groceries">#FFA726</color>
+    <color name="Food">#66BB6A</color>
+    <color name="Medical">#EF5350</color>
+    <color name="Transport">#29B6F6</color>
+    <color name="Misc">#DB33FF</color>
+    <color name="Investment">#D2007F</color>
+
 </resources>
